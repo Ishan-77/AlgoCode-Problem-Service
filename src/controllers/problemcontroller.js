@@ -1,6 +1,6 @@
 
 function pingCheckProblemController(req,res) {
-    return res.json({message:"Problem Controller is up,Routes are correct"});
+    return res.json({message:"Problem Controller is up"});
 }
 
 
