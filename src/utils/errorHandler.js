@@ -1,7 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
 const BaseError = require("../errors/base.error");
 
-function errorHandler(err,req,res,next) {
+function errorHandler(err,req,res,next) { // 4 params -> error handler, express has a default error handling middleware as well, added at end of middleware func stack
     if(err instanceof BaseError) {
         return res.status(err.statusCode).json({
             success:false,
