@@ -15,11 +15,9 @@ class ProblemService {
 
             problemData.description = sanitizeMarkdownContent(problemData.description);
 
-            console.log("Problem Data--",problemData);
 
             const problem =  await this.problemRepository.createProblem(problemData);
 
-            console.log("Problem created",problem);
 
             return problem;
 
@@ -31,6 +29,39 @@ class ProblemService {
 
         }
 
+    }
+
+    async getAllProblems() {
+
+        try {
+
+            const allproblems = await this.problemRepository.getAllProblems();
+
+            return allproblems;
+
+        } catch(error) {
+
+             console.log(error);
+
+            throw error;
+
+        }
+
+    }
+
+    async getProblem(id) {
+        try {
+
+            const problem = await this.problemRepository.getProblem(id);
+            return problem;
+
+        }catch(error) {
+
+              console.log(error);
+
+            throw error;
+
+        }
     }
 
 }

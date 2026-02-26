@@ -34,18 +34,31 @@ function pingCheckProblemController(req, res) {
 
 }
 
-function getProblem(req, res, next) {
+ async function getProblem(req, res, next) {
     try {
-        throw new NotImplemented('getProblem');
+        const problem = await problemService.getProblem(req.params.id)
+        return res.status(StatusCodes.OK).json( {
+            success:true,
+            message:'Successfully fetched problem with given problem id',
+            error: {},
+            data:problem
+
+        })
     } catch (error) {
         next(error);
     }
 
 }
 
-function getProblems(req, res, next) {
+ async function getProblems(req, res, next) {
     try {
-        throw new NotImplemented('getProblems');
+        const allproblems = await problemService.getAllProblems();
+        return res.status(StatusCodes.OK).json( {
+            success:true,
+            message:'Successfully fetched all problems',
+            error: {},
+            data:allproblems
+        })
     } catch (error) {
         next(error);
     }
