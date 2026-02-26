@@ -1,7 +1,14 @@
 
 
-const { StatusCodes } = require('http-status-codes');
 const NotImplemented = require('../errors/notImplemented.error');
+
+const {ProblemService} = require('../services');
+
+const {ProblemRepository} = require('../repositories');
+const { StatusCodes } = require('http-status-codes');
+
+
+const problemService = new ProblemService(new ProblemRepository());
 
 
 function pingCheckProblemController(req, res) {
@@ -9,12 +16,20 @@ function pingCheckProblemController(req, res) {
 }
 
 
-function addProblem(req, res, next) {
+ async function addProblem(req, res, next) {
 
     try {
-        throw new NotImplemented('addProblem');
+
+        console.log("incoming req body",req.body);
+        const newproblem =  await problemService.createProblem(req.body);
+        return res.status(StatusCodes.CREATED).json( {
+            success:true,
+            message:'Successfully created a new problem',
+            error: {},
+            data:newproblem
+        })
     } catch (error) {
-        next(error);
+        next(error); // will call error middleware
     }
 
 }
