@@ -1,7 +1,6 @@
 
 
 const NotFoundError = require('../errors/notfound.error');
-const NotImplementedError = require('../errors/notImplemented.error');
 const { Problem } = require('../models')
 class ProblemRepository {
 
