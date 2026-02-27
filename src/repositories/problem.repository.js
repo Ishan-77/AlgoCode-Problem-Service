@@ -1,7 +1,6 @@
 
 
 const NotFoundError = require('../errors/notfound.error');
-const NotImplementedError = require('../errors/notImplemented.error');
 const { Problem } = require('../models')
 class ProblemRepository {
 
@@ -42,13 +41,28 @@ class ProblemRepository {
 
     async getProblem(id) {
         try {
-            const problem  = await Problem.findById(id);
+            const problem = await Problem.findById(id);
 
-            if(!problem) throw new NotFoundError(id);
+            if (!problem) throw new NotFoundError(id);
 
             return problem;
 
-        }catch(error) {
+        } catch (error) {
+            console.log("Error", error);
+            throw error;
+        }
+    }
+
+    async deleteProblem(id) {
+        try {
+
+            const deletedProblem = await Problem.findByIdAndDelete(id);
+
+            if (!deletedProblem) throw new NotFoundError(id);
+
+            return deletedProblem;
+
+        } catch (error) {
             console.log("Error", error);
             throw error;
         }
